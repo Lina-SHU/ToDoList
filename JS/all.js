@@ -26,7 +26,7 @@ function makeid(length) {
 
 /* 渲染畫面 */ 
 function init(){
-  if(data.length === 0){
+  if(data && data.length === 0){
     listWrap.style.display = "none";
     return;
   }else{
