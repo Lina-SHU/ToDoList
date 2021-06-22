@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TO DO LIST</title>
+  <script src="https://kit.fontawesome.com/27bd1ef315.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="css/all.css">
+</head>
+<body>
+  <div class="wrap">
+    <h2 class="title">TODO LIST</h2>
+
+    <div class="input-group">
+      <input type="text" placeholder="新增代辦事項" class="addItem br">
+      <a href="#" class="addBtn"><i class="fas fa-plus br"></i></a>
+    </div>
+    <div class="list br">
+      <ul class="btn-list fz-14">
+        <li><a href="#" class="allBtn active">全部</a></li>
+        <li><a href="#" class="undoBtn">待完成</a></li>
+        <li><a href="#" class="doneBtn">已完成</a></li>
+      </ul>
+      <ul class="list-item"></ul>
+      <div class="isfinished fz-14">
+        <p class="count"></p>
+        <a href="#" class="deleteAll">刪除已完成項目</a>
+      </div>
+    </div>
+  </div>
+  
+
+  <script src="js/all.js"></script>
+</body>
+</html>
