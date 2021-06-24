@@ -10,6 +10,7 @@ const btnList = document.querySelectorAll('.btn-list > li > a');
 const allBtn = document.querySelector('.allBtn');
 const undoBtn = document.querySelector('.undoBtn');
 const doneBtn = document.querySelector('.doneBtn');
+const alert = document.querySelector('.alert');
 let pageNumber = 0;
 
 /* id random */
@@ -98,10 +99,10 @@ init();
 addBtn.addEventListener('click', addToDo);
 function addToDo(){
   if (!addItem.value){
-    alert('不可為空');
+    alert.textContent = '新增的代辦事項不能是空白的唷！';
     return;
   }
-
+  alert.textContent ="";
   data.push({
     id: makeid(5),
     name: addItem.value.trim(),
