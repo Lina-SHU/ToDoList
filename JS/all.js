@@ -10,6 +10,7 @@ const btnList = document.querySelectorAll('.btn-list > li > a');
 const allBtn = document.querySelector('.allBtn');
 const undoBtn = document.querySelector('.undoBtn');
 const doneBtn = document.querySelector('.doneBtn');
+let pageNumber = 0;
 
 /* id random */
 function makeid(length) {
@@ -31,16 +32,28 @@ function init(){
     return;
   }else{
     listWrap.style.display = "block";
-    removeStyle();
-    allBtn.classList.add('active');
-    getList(data);
+    if (pageNumber === 0){
+      removeStyle();
+      allBtn.classList.add('active');
+      getList(data);
+    } else if(pageNumber === 1){
+      removeStyle();
+      undoBtn.classList.add('active');
+      undoFilter();
+      getList(filterData);
+    } else if (pageNumber === 2){
+      removeStyle();
+      doneBtn.classList.add('active');
+      doneFilter();
+      getList(filterData);
+    }
   }
 }
 
 function getList(data){
   let num = 0;
   let str="";
-  data.forEach((item, index) => {
+  data.forEach((item) => {
     if(item.done){
       str += `
         <li>
@@ -116,39 +129,8 @@ function deleteOne(e){
   init();
 }
 
-/* filter */
-function removeStyle(){
-  btnList.forEach(item => {
-    item.classList.remove('active');
-  })
-}
-
-allBtn.addEventListener('click', (e)=> {
-  removeStyle();
-  e.target.classList.add('active');
-  getList(data);
-})
-
-undoBtn.addEventListener('click', (e) => {
-  removeStyle();
-  let filterData = data.filter(item =>{
-      return !item.done;
-  })
-  e.target.classList.add('active');
-  getList(filterData);
-})
-
-doneBtn.addEventListener('click', (e) => {
-  removeStyle();
-  let filterData = data.filter(item => {
-    return item.done;
-  })
-  e.target.classList.add('active');
-  getList(filterData);
-})
-
 /* 修改為已完成 */
-function editOne(e){
+function editOne(e) {
   let num = e.target.dataset.num;
   data.forEach(function (item) {
     if (item.id === num) {
@@ -157,3 +139,46 @@ function editOne(e){
   })
   init();
 }
+
+/* filter */
+function removeStyle(){
+  btnList.forEach(item => {
+    item.classList.remove('active');
+  })
+}
+
+function undoFilter(){
+  filterData = data.filter(item => {
+    return !item.done;
+  })
+}
+
+function doneFilter() {
+  filterData = data.filter(item => {
+    return item.done;
+  })
+}
+
+allBtn.addEventListener('click', (e)=> {
+  removeStyle();
+  e.target.classList.add('active');
+  pageNumber = 0;
+  getList(data);
+})
+
+undoBtn.addEventListener('click', (e) => {
+  removeStyle();
+  undoFilter();
+  pageNumber = 1;
+  e.target.classList.add('active');
+  init();
+})
+
+doneBtn.addEventListener('click', (e) => {
+  removeStyle();
+  doneFilter();
+  pageNumber = 2;
+  e.target.classList.add('active');
+  init();
+})
+
